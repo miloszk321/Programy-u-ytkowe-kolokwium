@@ -1,0 +1,177 @@
+#include <stdio.h>
+
+int lexComp(char str1[], char str2[]) {
+    int i = 0;
+    while (str1[i] != '\0' && str2[i] != '\0') {
+        if (str1[i] < str2[i]) return 1;
+        else if (str1[i] > str2[i]) return 0;
+        i++;
+    }
+    if (str1[i] == '\0' && str2[i] != '\0') return 1; // str1 jest wcześniejszy leksykograficznie
+    return 0; // str2 jest wcześniejszy lub napisy są identyczne
+}
+
+int main() {
+    char str1[] = "abc";
+    char str2[] = "abcd";
+    printf("Wynik porównania: %d\n", lexComp(str1, str2)); // 1
+    return 0;
+}
+
+
+
+
+
+
+void toLowerNew(char str[]) {
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (str[i] >= 'A' && str[i] <= 'Z') {
+            str[i] = str[i] + 32;
+        }
+    }
+}
+
+int main() {
+    char str[] = "Hello, World!";
+    toLowerNew(str);
+    printf("%s\n", str); // hello, world!
+    return 0;
+}
+
+
+
+
+
+
+void toUpperNew(char str[]) {
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (str[i] >= 'a' && str[i] <= 'z') {
+            str[i] = str[i] - 32;
+        }
+    }
+}
+
+int main() {
+    char str[] = "Hello, World!";
+    toUpperNew(str);
+    printf("%s\n", str); // HELLO, WORLD!
+    return 0;
+}
+
+
+
+
+
+void strCopyNew(char source[], char destination[]) {
+    int i = 0;
+    while ((destination[i] = source[i]) != '\0') i++;
+}
+
+int main() {
+    char src[] = "Copy this!";
+    char dst[20]; // Zakładamy, że mamy wystarczająco dużo miejsca
+    strCopyNew(src, dst);
+    printf("%s\n", dst); // Copy this!
+    return 0;
+}
+
+
+
+
+
+void strNcopy(char src[], char dst[], int n) {
+    int i;
+    for (i = 0; i < n && src[i] != '\0'; i++) {
+        dst[i] = src[i];
+    }
+    dst[i] = '\0'; // Null-terminujący
+}
+
+int main() {
+    char src[] = "Hello";
+    char dst[10];
+    strNcopy(src, dst, 3); // Kopiuje tylko 3 pierwsze znaki
+    printf("%s\n", dst); // Hel
+    return 0;
+}
+
+
+
+
+
+void strConcat(char src1[], char src2[], char dst[]) {
+    int i = 0, j = 0;
+    while ((dst[i++] = src1[j++]) != '\0');
+    i--; // Powrót, aby nadpisać '\0'
+    j = 0;
+    while ((dst[i++] = src2[j++]) != '\0');
+}
+
+int main() {
+    char src1[] = "Hello, ";
+    char src2[] = "World!";
+    char dst[20]; // Zakładamy, że mamy wystarczająco dużo miejsca
+    strConcat(src1, src2, dst);
+    printf("%s\n", dst); // Hello, World!
+    return 0;
+}
+
+
+
+
+void rmLower(char str[]) {
+    int i = 0, j = 0;
+    while (str[i] != '\0') {
+        if (!(str[i] >= 'a' && str[i] <= 'z')) {
+            str[j++] = str[i];
+        }
+        i++;
+    }
+    str[j] = '\0'; // Null-terminujący na końcu
+}
+
+int main() {
+    char str[] = "Hello, World!";
+    rmLower(str);
+    printf("%s\n", str); // H, W!
+    return 0;
+}
+
+
+
+
+void rmDigits(char str[]) {
+    int i = 0, j = 0;
+    while (str[i] != '\0') {
+        if (!(str[i] >= '0' && str[i] <= '9')) {
+            str[j++] = str[i];
+        }
+        i++;
+    }
+    str[j] = '\0'; // Null-terminujący na końcu
+}
+
+int main() {
+    char str[] = "123Hello456";
+    rmDigits(str);
+    printf("%s\n", str); // Hello
+    return 0;
+}
+
+
+
+
+void cutStr(char str[], int n, int m) {
+    int length = m - n + 1;
+    for (int i = 0; i < length; i++) {
+        str[i] = str[n + i];
+    }
+    str[length] = '\0'; // Null-terminujący na końcu
+}
+
+int main() {
+    char str[] = "Hello, World!";
+    cutStr(str, 7, 11); // Wycina "World"
+    printf("%s\n", str); // World
+    return 0;
+}
