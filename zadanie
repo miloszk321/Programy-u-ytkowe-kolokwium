@@ -1,0 +1,16 @@
+#include <stdio.h>
+
+int length(char *str) {
+    int len = 0;
+    while (*str != '\0') {
+        len++;
+        str++;
+    }
+    return len;
+}
+
+int main() {
+    char str[] = "Hello, world!";
+    printf("Długość napisu \"%s\" wynosi: %d\n", str, length(str));
+    return 0;
+}
